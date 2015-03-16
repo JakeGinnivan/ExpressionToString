@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ExpressionToString</id>
+    <version>$version$</version>
+    <title>ExpressionToString</title>
+    <authors>Jake Ginnivan</authors>
+    <owners>Jake Ginnivan</owners>
+    <projectUrl>https://github.com/JakeGinnivan/ExpressionToString/ApiApprover</projectUrl>
+    <licenseUrl>https://github.com/JakeGinnivan/ExpressionToString/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Source Only .NET expression tree formatter. Like Expression.ToString() without the noise</description>
+    <copyright>Copyright Jake Ginnivan 2015</copyright>
+    <tags>Expression visitor formatter tree</tags>
+  </metadata>
+  <files>
+    <file src="ExpressionStringBuilder.cs" target="content\App_Packages\ApiApprover.$version$\" />
+  </files>
+</package>
