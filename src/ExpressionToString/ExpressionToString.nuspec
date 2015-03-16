@@ -6,7 +6,7 @@
     <title>ExpressionToString</title>
     <authors>Jake Ginnivan</authors>
     <owners>Jake Ginnivan</owners>
-    <projectUrl>https://github.com/JakeGinnivan/ExpressionToString/ApiApprover</projectUrl>
+    <projectUrl>https://github.com/JakeGinnivan/ExpressionToString</projectUrl>
     <licenseUrl>https://github.com/JakeGinnivan/ExpressionToString/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Source Only .NET expression tree formatter. Like Expression.ToString() without the noise</description>
