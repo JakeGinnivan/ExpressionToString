@@ -237,7 +237,7 @@ namespace ExpressionToString
                 case ExpressionType.And:
                     return "&";
                 case ExpressionType.AndAlso:
-                    return "AndAlso";
+                    return "&&";
                 case ExpressionType.Divide:
                     return "/";
                 case ExpressionType.Equal:
@@ -263,7 +263,7 @@ namespace ExpressionToString
                 case ExpressionType.Or:
                     return "|";
                 case ExpressionType.OrElse:
-                    return "OrElse";
+                    return "||";
                 case ExpressionType.Subtract:
                     return "-";
                 default:

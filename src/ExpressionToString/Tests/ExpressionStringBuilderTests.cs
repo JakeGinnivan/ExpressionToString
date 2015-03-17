@@ -34,6 +34,13 @@ namespace ExpressionToString.Tests
             VerifyExpression(() => StaticMethodLotsOfArguments(notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage), "StaticMethodLotsOfArguments(...)");
         }
 
+        [Fact]
+        public void VerifyOperators()
+        {
+            VerifyExpression(t => t.StartsWith("A") && t.EndsWith("Z"), "(t) => (t.StartsWith(\"A\") && t.EndsWith(\"Z\"))");
+            VerifyExpression(t => t.StartsWith("A") || t.EndsWith("Z"), "(t) => (t.StartsWith(\"A\") || t.EndsWith(\"Z\"))");
+        }
+
         static void StaticMethod(int subTotal)
         {
         }
@@ -55,6 +62,11 @@ namespace ExpressionToString.Tests
         }
 
         void VerifyExpression<T>(Expression<Func<T>> func, string expression)
+        {
+            ExpressionStringBuilder.ToString(func).ShouldBe(expression);
+        }
+
+        void VerifyExpression(Expression<Func<string, bool>> func, string expression)
         {
             ExpressionStringBuilder.ToString(func).ShouldBe(expression);
         }
