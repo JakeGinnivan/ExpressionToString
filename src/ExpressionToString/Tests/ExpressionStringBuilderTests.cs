@@ -61,7 +61,7 @@ namespace ExpressionToString.Tests
 
         private void VerifyExpressionWithTruncate(Expression<Action> func, string expression)
         {
-            ExpressionStringBuilder.ToString(func, truncateLongArgumentList: true).ShouldBe(expression);
+            ExpressionStringBuilder.ToString(func, trimLongArgumentList: true).ShouldBe(expression);
         }
 
         void VerifyExpression(Expression<Action> func, string expression)
