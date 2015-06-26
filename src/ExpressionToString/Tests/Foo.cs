@@ -13,5 +13,10 @@ namespace ExpressionToString.Tests
         {
             
         }
+
+        public void InstanceMethod(string test)
+        {
+            
+        }
     }
 }
