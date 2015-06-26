@@ -29,6 +29,8 @@ namespace ExpressionToString.Tests
             VerifyExpression(() => InstanceMethodCall(), "InstanceMethodCall()");
             VerifyExpression(() => foo.InstanceMethod(), "foo.InstanceMethod()");
             VerifyExpression(() => foo.InstanceMethod(true), "foo.InstanceMethod(true)");
+            VerifyExpression(() => foo.InstanceMethod(string.Empty), "foo.InstanceMethod(string.Empty)");
+            VerifyExpression(() => foo.InstanceMethod("test"), "foo.InstanceMethod(\"test\")");
             VerifyExpression(() => StaticMethod(notifies.SubTotal), "StaticMethod(notifies.SubTotal)");
             VerifyExpressionWithTruncate(() => StaticMethodLotsOfArguments(notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage), "StaticMethodLotsOfArguments(...)");
             VerifyExpression(() => StaticMethodLotsOfArguments(notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage), "StaticMethodLotsOfArguments(notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage, notifies.TaxPercentage)");
@@ -41,19 +43,28 @@ namespace ExpressionToString.Tests
             VerifyExpression(t => t.StartsWith("A") || t.EndsWith("Z"), "(t) => (t.StartsWith(\"A\") || t.EndsWith(\"Z\"))");
         }
 
+        [Fact]
+        public void VerifyAction()
+        {
+            Action action = () => { };
+            Action<int> action2 = i => { };
+            //VerifyExpression(() => action(), "action()");
+            VerifyExpression(() => action2(5), "action2(5)");
+        }
+
+        [Fact]
+        public void VerifyStringEmpty()
+        {
+            Action<string> action = s => { };
+            VerifyExpression(() => action(string.Empty), "action(string.Empty)");
+        }
+
         static void StaticMethod(int subTotal)
         {
         }
 
         static void StaticMethodLotsOfArguments(int a, int b, int c, int d)
         {
-        }
-
-        [Fact]
-        public void VerifyAction()
-        {
-            Action action = () => { };
-            VerifyExpression(() => action(), "action()");
         }
 
         object InstanceMethodCall()

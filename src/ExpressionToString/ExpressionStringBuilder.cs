@@ -48,9 +48,18 @@ namespace ExpressionToString
 
         protected override Expression VisitInvocation(InvocationExpression node)
         {
-            var visitInvocation = base.VisitInvocation(node);
-            Out("()");
-            return visitInvocation;
+            base.Visit(node.Expression);
+
+            if (node.Arguments.Any())
+            {
+                Out("(");
+                foreach (var expression in node.Arguments)
+                {
+                    Visit(expression);
+                }
+                Out(")");
+            }
+            return node;
         }
 
         protected override Expression VisitBinary(BinaryExpression node)
@@ -73,7 +82,13 @@ namespace ExpressionToString
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            if (node.Expression.NodeType == ExpressionType.Constant)
+            if (node.Expression == null)
+            {
+                Out(node.Member.DeclaringType == null
+                    ? node.Member.Name
+                    : string.Format("{0}.{1}", SimplifyType(node.Member.DeclaringType), node.Member.Name));
+            }
+            else if (node.Expression.NodeType == ExpressionType.Constant)
             {
                 Visit(node.Expression);
                 if (skipDot)
@@ -91,6 +106,11 @@ namespace ExpressionToString
             }
 
             return node;
+        }
+
+        private static string SimplifyType(Type type)
+        {
+            return type.FullName.Replace("System.String", "string");
         }
 
         private static bool CheckIfAnonymousType(Type type)
