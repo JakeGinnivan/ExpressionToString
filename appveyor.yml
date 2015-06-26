@@ -1,0 +1,22 @@
+install:
+  - choco install gitversion.portable -pre -y
+
+platform:
+  - Any CPU
+
+configuration:
+  - Debug
+
+assembly_info:
+  patch: false
+
+before_build:
+  - nuget restore
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+build:
+  project: src\ExpressionToString.sln
+
+after_build:
+  - cmd: ECHO nuget pack src\ExpressionToString\ExpressionToString.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack src\ExpressionToString\ExpressionToString.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "ExpressionToString.%GitVersion_NuGetVersion%.nupkg"
