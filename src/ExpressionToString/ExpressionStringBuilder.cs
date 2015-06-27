@@ -7,7 +7,7 @@ using System.Text;
 // ReSharper disable CheckNamespace
 namespace ExpressionToString
 {
-    class ExpressionStringBuilder : ExpressionVisitor
+    public class ExpressionStringBuilder : ExpressionVisitor
     {
         // ReSharper disable InconsistentNaming
         private readonly StringBuilder builder = new StringBuilder();
